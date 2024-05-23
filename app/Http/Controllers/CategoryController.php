@@ -11,7 +11,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        echo "hello this is index";
+        $category_data=Category::get();
+        // print_r($category_data);
+        return view("categories.index",compact("category_data"));
     }
 
     /**
@@ -33,7 +35,7 @@ class CategoryController extends Controller
             "category_name"=>$request->category_name,
             "description"=>$request->description
         ]);
-        return view("categories.create")->with("success","Category inserted successfully");
+        return redirect()->route("category.create")->with("success","Data inserted");
     }
 
     /**
@@ -41,7 +43,10 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category_data=Category::where("id",$id)->first();
+        // print_r($category_data);
+        return view("categories.show",compact("category_data"));
+       
     }
 
     /**
@@ -65,6 +70,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::findorfail($id)->delete();
+        return redirect()->route("category.index")->with("success","Data deleted successfully");
     }
 }
