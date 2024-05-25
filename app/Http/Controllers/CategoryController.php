@@ -43,9 +43,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category_data=Category::where("id",$id)->first();
-        // print_r($category_data);
-        return view("categories.show",compact("category_data"));
+       $category_data=Category::where("id",$id)->first();
+       return view("categories.show",compact("category_data"));
        
     }
 
@@ -54,7 +53,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category_data=Category::findorfail($id);
+        // print_r($category_data);
+        return view("categories.edit",compact("category_data"));
     }
 
     /**
@@ -62,7 +63,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Category::where("id",$id)->update([
+            "category_name"=>$request->category_name,
+            "description"=>$request->description
+        ]);
+        return redirect()->route("category.index")->with("msg","Updated successfully");
     }
 
     /**
@@ -71,6 +76,6 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         Category::findorfail($id)->delete();
-        return redirect()->route("category.index")->with("success","Data deleted successfully");
+        return redirect()->route("category.index")->with("msg","Data deleted!!");
     }
 }

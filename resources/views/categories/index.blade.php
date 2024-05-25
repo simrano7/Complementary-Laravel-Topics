@@ -1,6 +1,6 @@
 <h1>All category loaded</h1>
 <!-- {{$category_data}} -->
-{{Session::get("success")}}
+{{Session::get("msg")}}
 <table border="1px">
     <tr>
         <td>Sno</td>
@@ -8,6 +8,7 @@
         <td>Desc</td>
         <td>View</td>
         <td>Delete</td>
+        <td>Update</td>
     </tr>
     @foreach($category_data as $c_data)
     <tr>
@@ -20,11 +21,16 @@
             </a>
         </td>
         <td>
-            <form action="{{route('category.destroy',$c_data->id)}}" method="post">
+            <form method="post" action="{{route('category.destroy',$c_data->id)}}">
                 @method("delete")
                 @csrf
                 <button>Delete</button>
             </form>
+        </td>
+        <td>
+            <a href="{{route('category.edit',$c_data->id)}}">
+            <button>Update</button>
+            </a>
         </td>
     </tr>
     @endforeach
