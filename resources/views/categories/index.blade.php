@@ -32,6 +32,9 @@
             <button>Update</button>
             </a>
         </td>
+        <td>
+    
+        </td>
     </tr>
     @endforeach
 </table>

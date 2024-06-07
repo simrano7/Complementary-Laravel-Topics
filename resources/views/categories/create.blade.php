@@ -1,6 +1,7 @@
 <h1>Category upload</h1>
 {{Session::get("success")}}
 <form method="post" action="{{route('category.store')}}">
+    
     @csrf
     <!-- token -->
     <label>Category Name</label>

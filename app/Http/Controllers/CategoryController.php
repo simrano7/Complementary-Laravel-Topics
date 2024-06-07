@@ -35,6 +35,7 @@ class CategoryController extends Controller
             "category_name"=>$request->category_name,
             "description"=>$request->description
         ]);
+        // 
         return redirect()->route("category.create")->with("success","Data inserted");
     }
 
